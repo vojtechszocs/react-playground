@@ -1,0 +1,92 @@
+:node-version: 6
+:dev-server-port: 9000
+
+= react-playground
+
+____
+Technology showcase of https://facebook.github.io/react/[React] and related tools to build
+modern web applications.
+____
+
+#WORK IN PROGRESS#
+
+== Development environment ==
+
+. install https://github.com/creationix/nvm[nvm] and run `nvm install v{node-version}.y.z`
+  **or** install https://nodejs.org/[Node.js] v{node-version} (LTS) manually on your platform
+. install https://yarnpkg.com/[Yarn] (latest stable)
+. run `yarn install` to download and link project's dependencies into the local `node_modules`
+  directory
+. start webpack dev-server via `yarn run start:dev` and JSON API server via `yarn run start:api`
+. open http://localhost:{dev-server-port}/index.html[React Playground Index] page in your browser
+
+=== webpack dev-server ===
+
+When using webpack dev-server, all project assets are processed in-memory (no `dist` directory).
+
+dev-server watches the filesystem and recompiles project assets on change, e.g. JS chunks whose
+content is impacted by the source change. Once recompiled, application's HTML page is automatically
+reloaded (dev-server does this by injecting a script that opens WebSocket connection to the server).
+
+== Basic commands ==
+
+[cols="1*30%,1*70%", options="header"]
+|===
+
+| Command
+| What it does
+
+| `yarn run build`
+| Build project for production. Outputs are placed in `dist` directory. Performs code linting
+and runs unit tests before doing the actual build.
+
+| `yarn run build:dev`
+| Build project for development (without optimizations). Same output location as with `build`
+script. No code linting or unit tests, just the build itself.
+
+| `yarn run start:dev`
+| Starts webpack dev-server, watching the filesystem and recompiling project assets on change.
+Serves both project assets and API requests (proxied to JSON API server).
+
+| `yarn run start:api`
+| Starts JSON API server that imitates a real backend.
+
+| `yarn run test`
+| #TODO implement#
+
+| `yarn run test:watch`
+| #TODO implement#
+
+|===
+
+== Other commands ==
+
+[cols="1*30%,1*70%", options="header"]
+|===
+
+| Command
+| What it does
+
+| `yarn outdated`
+| Check for outdated dependencies.
+
+| `yarn check`
+| Validates dependency resolutions in `yarn.lock` according to dependencies declared in
+`package.json`.
+
+| `yarn run foo` +
+`yarn run foo \-- args`
+
+| Run a locally installed JS module `foo` with optional arguments, for example:
+`yarn run eslint \-- -h`.
+
+|===
+
+== License ==
+
+#TODO check#
+
+[source, text]
+----
+include::LICENSE[]
+----

@@ -1,0 +1,15 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 2015
+  },
+  "extends": [
+    "eslint-config-standard",
+    "eslint-config-standard-react"
+  ],
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "__DEV__": false
+  }
+}
