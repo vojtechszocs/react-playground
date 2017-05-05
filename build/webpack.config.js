@@ -68,7 +68,7 @@ const config = module.exports = {
 
   // configure output for use with developer tooling, always prefer
   // the `source-map` option for production builds
-  devtool: isDev ? 'cheap-module-eval-source-map ' : 'source-map',
+  devtool: isDev ? 'cheap-source-map' : 'source-map',
 
   // customize how webpack resolves modules to be part of the bundle
   resolve: {
@@ -84,7 +84,8 @@ const config = module.exports = {
         include: srcDir,
         loader: 'babel-loader',
         options: {
-          presets: ['es2015', 'react']
+          presets: ['es2015', 'react'],
+          plugins: ['transform-object-rest-spread']
         }
       },
       {

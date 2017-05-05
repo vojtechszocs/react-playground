@@ -2,7 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 const TestComponent = ({}) => (
-  <div>It works.</div>
+  <div>
+    <b>TODO implement</b>
+  </div>
 )
 
 ReactDOM.render(
