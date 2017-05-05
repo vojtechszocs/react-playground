@@ -1,3 +1,5 @@
+:prewrap!:
+
 :node-version: 6
 :dev-server-port: 9000
 
@@ -8,29 +10,29 @@ Technology showcase of https://facebook.github.io/react/[React] and related tool
 modern web applications.
 ____
 
-**WORK IN PROGRESS**
+*WORK IN PROGRESS*
 
 == Development environment ==
 
 . install https://github.com/creationix/nvm[nvm] and run `nvm install v{node-version}.y.z`
-  **or** install https://nodejs.org/[Node.js] v{node-version} (LTS) manually on your platform
+  *or* install https://nodejs.org/[Node.js] v{node-version} (LTS) manually on your platform
 . install https://yarnpkg.com/[Yarn] (latest stable)
 . run `yarn install` to download and link project's dependencies into the local `node_modules`
   directory
 . start webpack dev-server via `yarn run start:dev` and JSON API server via `yarn run start:api`
 . open http://localhost:{dev-server-port}/index.html[React Playground Index] page in your browser
 
-=== webpack dev-server ===
+=== Using webpack dev-server ===
 
-When using webpack dev-server, all project assets are processed in-memory (no `dist` directory).
+With dev-server, all project assets are processed in-memory (no `dist` directory).
 
 dev-server watches the filesystem and recompiles project assets on change, e.g. JS chunks whose
 content is impacted by the source change. Once recompiled, application's HTML page is automatically
-reloaded (dev-server does this by injecting a script that opens WebSocket connection to the server).
+reloaded (this is done by injecting a script that opens a WebSocket connection to the server).
 
 == Basic commands ==
 
-[cols="1,4a", options="header"]
+[cols="1a,2a", options="header"]
 |===
 
 | Command
@@ -52,16 +54,16 @@ Serves both project assets and API requests (proxied to JSON API server).
 | Starts JSON API server that imitates a real backend.
 
 | `yarn run test`
-| **TODO implement**
+| *TODO implement*
 
 | `yarn run test:watch`
-| **TODO implement**
+| *TODO implement*
 
 |===
 
 == Other commands ==
 
-[cols="1,4a", options="header"]
+[cols="1a,2a", options="header"]
 |===
 
 | Command
@@ -84,6 +86,4 @@ Serves both project assets and API requests (proxied to JSON API server).
 
 == License ==
 
---
-include::LICENSE[MIT]
---
+https://github.com/vojtechszocs/react-playground/blob/master/LICENSE[MIT]
