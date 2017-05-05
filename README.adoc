@@ -1,5 +1,3 @@
-:prewrap!:
-
 :node-version: 6
 :dev-server-port: 9000
 
@@ -24,7 +22,8 @@ ____
 
 === Using webpack dev-server ===
 
-With dev-server, all project assets are processed in-memory (no `dist` directory).
+With https://webpack.js.org/configuration/dev-server/[dev-server], all project assets are processed
+in-memory (no `dist` directory).
 
 dev-server watches the filesystem and recompiles project assets on change, e.g. JS chunks whose
 content is impacted by the source change. Once recompiled, application's HTML page is automatically
@@ -32,11 +31,8 @@ reloaded (this is done by injecting a script that opens a WebSocket connection t
 
 == Basic commands ==
 
-[cols="1a,2a", options="header"]
+[cols="1a,2a"]
 |===
-
-| Command
-| What it does
 
 | `yarn run build`
 | Build project for production. Outputs are placed in `dist` directory. Performs code linting
@@ -63,11 +59,8 @@ Serves both project assets and API requests (proxied to JSON API server).
 
 == Other commands ==
 
-[cols="1a,2a", options="header"]
+[cols="1a,2a"]
 |===
-
-| Command
-| What it does
 
 | `yarn outdated`
 | Check for outdated dependencies.
@@ -76,11 +69,11 @@ Serves both project assets and API requests (proxied to JSON API server).
 | Validates dependency resolutions in `yarn.lock` according to dependencies declared in
 `package.json`.
 
-| `yarn run foo` +
-`yarn run foo \-- args`
+| `yarn run foo`
+| Run a locally installed JS module `foo`.
 
-| Run a locally installed JS module `foo` with optional arguments, for example:
-`yarn run eslint \-- -h`.
+| `yarn run foo \-- args`
+| Run a locally installed JS module `foo` with arguments.
 
 |===
 
