@@ -30,7 +30,7 @@ reloaded (dev-server does this by injecting a script that opens WebSocket connec
 
 == Basic commands ==
 
-[options="header"]
+[cols="2",options="header"]
 |===
 
 | Command
@@ -61,7 +61,7 @@ Serves both project assets and API requests (proxied to JSON API server).
 
 == Other commands ==
 
-[options="header"]
+[cols="2",options="header"]
 |===
 
 | Command
@@ -86,5 +86,5 @@ Serves both project assets and API requests (proxied to JSON API server).
 
 [source, text]
 ----
-include::https://github.com/vojtechszocs/react-playground/blob/master/LICENSE[]
+include::LICENSE[MIT]
 ----
