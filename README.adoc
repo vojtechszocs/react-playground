@@ -30,7 +30,7 @@ reloaded (dev-server does this by injecting a script that opens WebSocket connec
 
 == Basic commands ==
 
-[cols="2",options="header"]
+[cols="1,4a", options="header"]
 |===
 
 | Command
@@ -61,7 +61,7 @@ Serves both project assets and API requests (proxied to JSON API server).
 
 == Other commands ==
 
-[cols="2",options="header"]
+[cols="1,4a", options="header"]
 |===
 
 | Command
@@ -84,7 +84,6 @@ Serves both project assets and API requests (proxied to JSON API server).
 
 == License ==
 
-[source, text]
-----
+--
 include::LICENSE[MIT]
-----
+--
