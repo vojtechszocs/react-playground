@@ -29,7 +29,8 @@ class App extends React.Component {
       const text = note.text
       const tags = note.tags || []
 
-      return text.includes(filter) || tags.some(tag => tag.includes(filter))
+      return text.toLowerCase().includes(filter.toLowerCase())
+        || tags.some(tag => tag.toLowerCase().includes(filter.toLowerCase()))
     })
   }
 
