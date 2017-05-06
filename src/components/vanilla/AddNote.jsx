@@ -13,23 +13,28 @@ const AddNote = ({ onAdd }) => {
         event.preventDefault()
 
         const text = textInput.value.trim()
-        const tags = tagInput.value.trim() ? tagInput.value.split(',') : []
+
+        const tags = tagInput.value.trim()
+          ? tagInput.value.split(',').filter(tag => tag.length > 0)
+          : []
 
         if (text) {
           onAdd({ text, tags })
         }
 
-        [textInput, tagInput].forEach(input => {
-          input.value = ''
-        })
+        [textInput, tagInput].forEach(input => { input.value = '' })
       }}>
+
         <input type='text' className={style.input}
                placeholder='Enter some text here'
                ref={input => { textInput = input }} />
+
         <input type='text' className={style.input}
                placeholder='Tags, separated by commas (optional)'
                ref={input => { tagInput = input }} />
+
         <button type='submit'>Add Note</button>
+
       </form>
 
     </div>

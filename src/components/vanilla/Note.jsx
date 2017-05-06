@@ -7,9 +7,12 @@ const Note = ({ text, tags = [], onRemove }) => (
   <div className={style.root}>
 
     <div className={style.textWithButtons}>
+
       <span className={style.text}>{text}</span>
+
       <button className={style.removeButton}
               onClick={onRemove}>Remove</button>
+
     </div>
 
     {tags.map(tag => (

@@ -1,3 +1,9 @@
 .root {
-  padding: 0 1em;
+  padding: 1em;
+}
+
+.header:after {
+  display: block;
+  clear: both;
+  content: '';
 }
