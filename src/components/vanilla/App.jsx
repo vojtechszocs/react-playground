@@ -31,6 +31,8 @@ class App extends React.Component {
 
         <NoteList notes={this.state.notes} />
 
+        {__DEV__ && console.log('notes', this.state.notes)}
+
       </div>
     )
   }
