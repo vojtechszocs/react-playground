@@ -17,7 +17,7 @@ ____
 * http://eslint.org/[ESLint] with https://standardjs.com/[JavaScript Standard Style] rules
 * https://stylelint.io/[stylelint] with
   https://github.com/stylelint/stylelint-config-standard[common CSS] rules
-* *TODO coming soon: Redux & Saga, AVA*
+* *TODO coming soon: Redux and Saga, testing with AVA, and some other stuff*
 
 == Development environment ==
 

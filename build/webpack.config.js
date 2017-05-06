@@ -168,7 +168,7 @@ const config = module.exports = {
       entryChunk: 'vanilla'
     }),
     htmlPluginInstance({
-      title: `React App with Redux & Saga`,
+      title: `React App with Redux and Saga`,
       filename: 'react-redux-saga.html',
       entryChunk: 'react-redux-saga'
     }),
