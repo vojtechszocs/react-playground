@@ -29,9 +29,17 @@ class App extends React.Component {
           }))
         }} />
 
-        <NoteList notes={this.state.notes} />
+        <NoteList notes={this.state.notes} onNoteRemove={id => {
+          this.setState(prevState => ({
+            notes: prevState.notes.filter(note => (
+              note.id !== id
+            ))
+          }))
+        }} />
 
-        {__DEV__ && console.log('notes', this.state.notes)}
+        {__DEV__ &&
+          console.log(`<App> notes (${this.state.notes.length})`, this.state.notes)
+        }
 
       </div>
     )

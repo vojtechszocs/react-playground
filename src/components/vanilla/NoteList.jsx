@@ -3,11 +3,12 @@ import PropTypes from 'prop-types'
 
 import Note from './Note'
 
-const NoteList = ({ notes }) => (
+const NoteList = ({ notes, onNoteRemove }) => (
   <div>
 
     {notes.map(note => (
-      <Note key={note.id} {...note} />
+      <Note key={note.id} {...note}
+            onRemove={() => onNoteRemove(note.id)} />
     ))}
 
   </div>
@@ -15,9 +16,11 @@ const NoteList = ({ notes }) => (
 
 NoteList.propTypes = {
   notes: PropTypes.arrayOf(PropTypes.shape({
-    ...Note.propTypes,
-    id: PropTypes.number.isRequired
-  })).isRequired
+    id: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string)
+  })).isRequired,
+  onNoteRemove: PropTypes.func.isRequired
 }
 
 export default NoteList

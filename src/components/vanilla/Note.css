@@ -8,8 +8,24 @@
   margin-bottom: 0;
 }
 
+.textWithButtons {
+  height: 2em;
+  line-height: 2em;
+}
+
+.textWithButtons:after {
+  display: block;
+  clear: both;
+  content: '';
+}
+
 .text {
+  float: left;
   font-weight: bold;
+}
+
+.removeButton {
+  float: right;
 }
 
 .tag {
