@@ -16,7 +16,7 @@ ____
   https://babeljs.io/docs/plugins/preset-es2015/[ES2015] preset
 * http://eslint.org/[ESLint] with https://standardjs.com/[JavaScript Standard Style] rules
 * https://stylelint.io/[stylelint] with
-  https://github.com/stylelint/stylelint-config-standard[common CSS rules]
+  https://github.com/stylelint/stylelint-config-standard[common CSS] rules
 * *TODO coming soon: Redux & Saga, AVA*
 
 == Development environment ==

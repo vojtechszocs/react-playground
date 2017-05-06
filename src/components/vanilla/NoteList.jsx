@@ -15,9 +15,8 @@ const NoteList = ({ notes }) => (
 
 NoteList.propTypes = {
   notes: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    tags: PropTypes.arrayOf(PropTypes.string)
+    ...Note.propTypes,
+    id: PropTypes.number.isRequired
   })).isRequired
 }
 
