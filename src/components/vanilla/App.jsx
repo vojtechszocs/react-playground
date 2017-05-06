@@ -35,7 +35,17 @@ class App extends React.Component {
   }
 
   setFilter (filter) {
-    this.setState({ filter })
+    if (this.state.filter !== filter) {
+      this.setState({ filter })
+    }
+  }
+
+  filterByTag (tag) {
+    this.setFilter(tag)
+  }
+
+  resetFilter () {
+    this.setFilter('')
   }
 
   addNote (note) {
@@ -61,12 +71,15 @@ class App extends React.Component {
 
           <AddNote onAdd={this.addNote} />
 
-          <NoteFilter onChange={this.setFilter} />
+          <NoteFilter value={this.state.filter}
+                      onChange={this.setFilter}
+                      onReset={this.resetFilter} />
 
         </div>
 
         <NoteList notes={this.filterNotes(this.state)}
-                  onNoteRemove={this.removeNote} />
+                  onNoteRemove={this.removeNote}
+                  onTagClick={this.filterByTag} />
 
         {__DEV__ && console.log('<App> state', this.state)}
 

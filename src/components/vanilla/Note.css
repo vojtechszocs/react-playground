@@ -35,6 +35,7 @@
   padding: 4px;
   margin-right: 0.5em;
   margin-top: 0.5em;
+  cursor: pointer;
 }
 
 .tag:last-child {
