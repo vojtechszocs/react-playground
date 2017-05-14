@@ -3,7 +3,7 @@
 # project dependencies
 node_modules/
 
-# project output files
+# project outputs
 dist/
 
 # IDE files

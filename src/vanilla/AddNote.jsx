@@ -15,14 +15,16 @@ const AddNote = ({ onAdd }) => {
         const text = textInput.value.trim()
 
         const tags = tagInput.value.trim()
-          ? tagInput.value.split(',').filter(tag => tag.length > 0)
+          ? tagInput.value.split(',').filter(tag => tag)
           : []
 
         if (text) {
           onAdd({ text, tags })
         }
 
-        [textInput, tagInput].forEach(input => { input.value = '' })
+        for (const input of [textInput, tagInput]) {
+          input.value = ''
+        }
       }}>
 
         <input type='text' className={style.input}

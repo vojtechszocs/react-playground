@@ -30,16 +30,16 @@ const devServerPort = 9000
 
 // application entry points, relative to webpack context
 const appEntryPoints = {
-  'vanilla': './vanilla-react-app.jsx',
-  'react-redux-saga': './react-redux-saga-app.jsx'
+  'vanilla-react': './vanilla-react.app.jsx',
+  'react-redux': './react-redux.app.jsx'
 }
 
 // HtmlPlugin instance creator for a specific entry point
-function htmlPluginInstance ({ title, filename, entryChunk }) {
+function htmlPluginInstance ({ entryChunk, title }) {
   return new HtmlPlugin({
-    title,
-    filename,
     chunks: ['vendor', 'common', entryChunk],
+    title,
+    filename: `${entryChunk}.html`,
     template: `${buildDir}/app-index.html.ejs`,
     inject: true,
     hash: true
@@ -54,7 +54,7 @@ const config = module.exports = {
 
   // entry points, each one represented by a separate bundle
   entry: Object.assign({
-    'vendor': ['babel-polyfill'] // add 3rd party modules here
+    'vendor': ['babel-polyfill', 'whatwg-fetch']
   }, appEntryPoints),
 
   // compilation output settings
@@ -163,14 +163,12 @@ const config = module.exports = {
 
     // generate an HTML page for each entry point
     htmlPluginInstance({
-      title: `Vanilla React App`,
-      filename: 'vanilla.html',
-      entryChunk: 'vanilla'
+      entryChunk: 'vanilla-react',
+      title: 'Vanilla React App'
     }),
     htmlPluginInstance({
-      title: `React App with Redux and Saga`,
-      filename: 'react-redux-saga.html',
-      entryChunk: 'react-redux-saga'
+      entryChunk: 'react-redux',
+      title: 'React App with Redux'
     }),
 
     // copy static files into build output directory

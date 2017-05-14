@@ -9,6 +9,10 @@
   margin-bottom: 0;
 }
 
+.rootDone {
+  background: greenyellow;
+}
+
 .textWithButtons {
   line-height: 2em;
 }
@@ -24,8 +28,13 @@
   font-weight: bold;
 }
 
-.removeButton {
+.textDone {
+  text-decoration: line-through;
+}
+
+.button {
   float: right;
+  margin-left: 0.5em;
 }
 
 .tag {

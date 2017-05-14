@@ -1,8 +1,32 @@
 {
   "notes": [
-    { "id": 1, "text": "Get outside more often", "tags": ["lifestyle"] },
-    { "id": 2, "text": "Keep up with ever changing JavaScript landscape", "tags": ["javascript", "technology"] },
-    { "id": 3, "text": "Buy new tablet to read news", "tags": ["lifestyle", "technology"] },
-    { "id": 4, "text": "Spend the whole weekend doing nothing" }
+    {
+      "id": 1,
+      "text": "Get outside more often",
+      "tags": [
+        "lifestyle"
+      ]
+    },
+    {
+      "id": 2,
+      "text": "Keep up with ever changing JavaScript landscape",
+      "tags": [
+        "javascript",
+        "technology"
+      ]
+    },
+    {
+      "id": 3,
+      "text": "Buy new tablet to read news",
+      "tags": [
+        "lifestyle",
+        "technology"
+      ]
+    },
+    {
+      "id": 4,
+      "text": "Spend the whole weekend doing nothing",
+      "done": true
+    }
   ]
 }

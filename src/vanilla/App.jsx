@@ -6,6 +6,7 @@ import style from './App.css'
 import AddNote from './AddNote'
 import NoteFilter from './NoteFilter'
 import NoteList from './NoteList'
+import { filterNotes, nextNoteId } from './utils'
 
 class App extends React.Component {
 
@@ -20,18 +21,23 @@ class App extends React.Component {
     autoBind(this)
   }
 
-  filterNotes ({ notes, filter }) {
-    if (!filter) {
-      return notes
-    }
+  addNote (note) {
+    this.setState(prevState => ({
+      notes: [
+        ...prevState.notes,
+        {
+          ...note,
+          id: nextNoteId(prevState.notes),
+          done: false
+        }
+      ]
+    }))
+  }
 
-    return notes.filter(note => {
-      const text = note.text
-      const tags = note.tags || []
-
-      return text.toLowerCase().includes(filter.toLowerCase())
-        || tags.some(tag => tag.toLowerCase().includes(filter.toLowerCase()))
-    })
+  removeNote (id) {
+    this.setState(prevState => ({
+      notes: prevState.notes.filter(note => note.id !== id)
+    }))
   }
 
   setFilter (filter) {
@@ -40,26 +46,22 @@ class App extends React.Component {
     }
   }
 
-  filterByTag (tag) {
-    this.setFilter(tag)
-  }
-
   resetFilter () {
     this.setFilter('')
   }
 
-  addNote (note) {
+  toggleNoteDone (id) {
     this.setState(prevState => ({
-      notes: prevState.notes.concat({
-        ...note,
-        id: this.props.getNextId()
+      notes: prevState.notes.map(note => {
+        if (note.id === id) {
+          return {
+            ...note,
+            done: !note.done
+          }
+        } else {
+          return note
+        }
       })
-    }))
-  }
-
-  removeNote (id) {
-    this.setState(prevState => ({
-      notes: prevState.notes.filter(note => note.id !== id)
     }))
   }
 
@@ -77,11 +79,12 @@ class App extends React.Component {
 
         </div>
 
-        <NoteList notes={this.filterNotes(this.state)}
-                  onNoteRemove={this.removeNote}
-                  onTagClick={this.filterByTag} />
+        <NoteList notes={filterNotes(this.state.notes, this.state.filter)}
+                  onDoneToggle={this.toggleNoteDone}
+                  onRemove={this.removeNote}
+                  onTagClick={this.setFilter} />
 
-        {__DEV__ && console.log('<App> state', this.state)}
+        {__DEV__ && console.log('<App> component state', this.state)}
 
       </div>
     )
@@ -90,8 +93,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  notes: NoteList.propTypes.notes,
-  getNextId: PropTypes.func.isRequired
+  notes: NoteList.propTypes.notes
 }
 
 export default App
