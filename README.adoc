@@ -1,3 +1,4 @@
+:toc: macro
 :node-version: 6
 :dev-server-port: 9000
 
@@ -9,6 +10,8 @@ modern web applications.
 ____
 
 *WORK IN PROGRESS*
+
+toc::[]
 
 == Common technology stack ==
 
@@ -26,7 +29,7 @@ recent Windows platforms, https://www.xfive.co/blog/stop-supporting-ie10-ie9-ie8
 
 * http://localhost:{dev-server-port}/vanilla-react.html[Vanilla React App]
 * http://localhost:{dev-server-port}/react-redux.html[React App with Redux]
-** _vanilla plus:_ http://redux.js.org/[Redux] with https://github.com/reactjs/react-redux[react-redux]
+** _Vanilla plus:_ http://redux.js.org/[Redux] with https://github.com/reactjs/react-redux[react-redux]
    and https://github.com/reactjs/reselect[Reselect]
 * _coming soon:_ https://redux-saga.js.org/[Redux-Saga]
 
@@ -73,11 +76,11 @@ Starts JSON API server that imitates a real backend.
 
 === `yarn run test` ===
 
-*TODO implement*
+TODO implement
 
 === `yarn run test:watch` ===
 
-*TODO implement*
+TODO implement
 
 == Other commands ==
 
@@ -90,7 +93,7 @@ Check for outdated dependencies.
 Validates dependency resolutions in `yarn.lock` based on project's dependencies declared in
 `package.json`.
 
-=== `yarn run foo` or `yarn run foo \-- args` ===
+=== `yarn run foo` / `yarn run foo \-- args` ===
 
 Run a locally installed JS module `foo`.
 
