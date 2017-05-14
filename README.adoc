@@ -10,14 +10,25 @@ ____
 
 *WORK IN PROGRESS*
 
-== Technology stack ==
+== Common technology stack ==
 
 * https://webpack.js.org/[webpack] with http://babeljs.io/[Babel] using
   https://babeljs.io/docs/plugins/preset-es2015/[ES2015] preset
 * http://eslint.org/[ESLint] with https://standardjs.com/[JavaScript Standard Style] rules
 * https://stylelint.io/[stylelint] with
   https://github.com/stylelint/stylelint-config-standard[common CSS] rules
-* *TODO coming soon: Redux and Saga, testing with AVA, and some other stuff*
+* https://github.com/css-modules/css-modules[CSS modules] (_coming soon:_ http://postcss.org/[PostCSS])
+
+As for Internet Explorer(TM), we only care about the officially supported (latest) version for
+recent Windows platforms, https://www.xfive.co/blog/stop-supporting-ie10-ie9-ie8/[and so should you].
+
+== Prototypes ==
+
+* http://localhost:{dev-server-port}/vanilla-react.html[Vanilla React App]
+* http://localhost:{dev-server-port}/react-redux.html[React App with Redux]
+** _vanilla plus:_ http://redux.js.org/[Redux] with https://github.com/reactjs/react-redux[react-redux]
+   and https://github.com/reactjs/reselect[Reselect]
+* _coming soon:_ https://redux-saga.js.org/[Redux-Saga]
 
 == Development environment ==
 
@@ -27,64 +38,61 @@ ____
 . run `yarn install` to download and link project's dependencies into the local `node_modules`
   directory
 . start webpack dev-server via `yarn run start:dev` and JSON API server via `yarn run start:api`
-. open http://localhost:{dev-server-port}/index.html[React Playground Index] page in your browser
+. open the link:#prototypes[prototype page] in your web browser and start hacking!
 
 === Using webpack dev-server ===
 
-With https://webpack.js.org/configuration/dev-server/[dev-server], all project assets are processed
-in-memory (no `dist` directory).
+With https://webpack.js.org/configuration/dev-server/[dev-server], all project assets are
+processed in-memory (no `dist` directory).
 
-dev-server watches the filesystem and recompiles project assets on change, e.g. JS chunks whose
-content is impacted by the source change. Once recompiled, application's HTML page is automatically
-reloaded (this is done by injecting a script that opens a WebSocket connection to the server).
+dev-server watches the filesystem and recompiles project assets on change, e.g. JS chunks
+whose content is impacted by the source change. Once recompiled, application's HTML page is
+automatically reloaded (this is done by injecting a script that opens a WebSocket connection
+to the server).
 
 == Basic commands ==
 
-[cols="1a,2a"]
-|===
+=== `yarn run build` ===
 
-| `yarn run build`
-| Build project for production. Outputs are placed in `dist` directory. Performs code linting
+Build project for production. Outputs are placed in `dist` directory. Performs code linting
 and runs unit tests before doing the actual build.
 
-| `yarn run build:dev`
-| Build project for development (without optimizations). Same output location as with `build`
+=== `yarn run build:dev` ===
+
+Build project for development (without optimizations). Same output location as with `build`
 script. No code linting or unit tests, just the build itself.
 
-| `yarn run start:dev`
-| Starts webpack dev-server, watching the filesystem and recompiling project assets on change.
+=== `yarn run start:dev` ===
+
+Starts webpack dev-server, watching the filesystem and recompiling project assets on change.
 Serves both project assets and API requests (proxied to JSON API server).
 
-| `yarn run start:api`
-| Starts JSON API server that imitates a real backend.
+=== `yarn run start:api` ===
 
-| `yarn run test`
-| *TODO implement*
+Starts JSON API server that imitates a real backend.
 
-| `yarn run test:watch`
-| *TODO implement*
+=== `yarn run test` ===
 
-|===
+*TODO implement*
+
+=== `yarn run test:watch` ===
+
+*TODO implement*
 
 == Other commands ==
 
-[cols="1a,2a"]
-|===
+=== `yarn outdated` ===
 
-| `yarn outdated`
-| Check for outdated dependencies.
+Check for outdated dependencies.
 
-| `yarn check`
-| Validates dependency resolutions in `yarn.lock` according to dependencies declared in
+=== `yarn check` ===
+
+Validates dependency resolutions in `yarn.lock` based on project's dependencies declared in
 `package.json`.
 
-| `yarn run foo`
-| Run a locally installed JS module `foo`.
+=== `yarn run foo` or `yarn run foo \-- args` ===
 
-| `yarn run foo \-- args`
-| Run a locally installed JS module `foo` with arguments.
-
-|===
+Run a locally installed JS module `foo`.
 
 == License ==
 
