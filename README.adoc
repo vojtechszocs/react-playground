@@ -28,10 +28,11 @@ recent Windows platforms, https://www.xfive.co/blog/stop-supporting-ie10-ie9-ie8
 == Prototypes ==
 
 * http://localhost:{dev-server-port}/vanilla-react.html[Vanilla React App]
-* http://localhost:{dev-server-port}/react-redux.html[React App with Redux]
-** _Vanilla plus:_ http://redux.js.org/[Redux] with https://github.com/reactjs/react-redux[react-redux]
-   and https://github.com/reactjs/reselect[Reselect]
+* http://localhost:{dev-server-port}/react-redux.html[React App with Redux] -- Vanilla plus
+  http://redux.js.org/[Redux] with https://github.com/reactjs/react-redux[react-redux] and
+  https://github.com/reactjs/reselect[Reselect]
 * _coming soon:_ https://redux-saga.js.org/[Redux-Saga]
+* _coming soon:_ https://mobx.js.org/[MobX]
 
 == Development environment ==
 
@@ -96,6 +97,15 @@ Validates dependency resolutions in `yarn.lock` based on project's dependencies 
 === `yarn run foo` / `yarn run foo \-- args` ===
 
 Run a locally installed JS module `foo`.
+
+== Good articles ==
+
+* https://github.com/markerikson/react-redux-links[tutorials and resources on React, Redux, ES6 and more]
+  (don't get overwhelmed, learn stuff step by step)
+* https://www.robinwieruch.de/redux-mobx-confusion/[dissolving the confusion around Redux and MobX]
+* https://goshakkk.name/redux-antipattern-mapstatetoprops/[writing meaningful `mapStateToProps`]
+* https://decembersoft.com/posts/a-simple-naming-convention-for-action-creators-in-redux-js/[convention
+  to differentiate action creators from action types]
 
 == License ==
 
