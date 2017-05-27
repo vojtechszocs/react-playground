@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import AddNote from '../vanilla/AddNote'
 import { getNextNoteId } from './selectors'
-import { addNote } from './actions'
+import { addingNote } from './actions/notes'
 
 const mapStateToProps = (state) => {
   return {
@@ -17,7 +17,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return {
     ...ownProps,
     onAdd: (note) => {
-      dispatch(addNote({
+      dispatch(addingNote({
         ...note,
         id: stateProps.nextNoteId
       }))

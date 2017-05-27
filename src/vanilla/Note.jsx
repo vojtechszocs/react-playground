@@ -29,7 +29,7 @@ const Note = ({
 
     </div>
 
-    {tags.map(tag => (
+    {tags.slice().sort().map(tag => (
       <span key={tag} className={style.tag} onClick={() => onTagClick(tag)}>
         {tag}
       </span>

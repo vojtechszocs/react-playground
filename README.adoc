@@ -29,9 +29,11 @@ recent Windows platforms, https://www.xfive.co/blog/stop-supporting-ie10-ie9-ie8
 
 * http://localhost:{dev-server-port}/vanilla-react.html[Vanilla React App]
 * http://localhost:{dev-server-port}/react-redux.html[React App with Redux] -- Vanilla plus
-  http://redux.js.org/[Redux] with https://github.com/reactjs/react-redux[react-redux] and
-  https://github.com/reactjs/reselect[Reselect]
-* _coming soon:_ https://redux-saga.js.org/[Redux-Saga]
+  http://redux.js.org/[Redux] {amp} https://github.com/reactjs/react-redux[react-redux], featuring
+  https://github.com/reactjs/reselect[Reselect] for efficient client state selectors
+* http://localhost:{dev-server-port}/react-redux-saga.html[React App with Redux and Saga] -- Redux plus
+  https://redux-saga.js.org/[Redux-Saga], featuring https://github.com/gcanti/tcomb[tcomb] for API data
+  type validation
 * _coming soon:_ https://mobx.js.org/[MobX]
 
 == Development environment ==
@@ -101,7 +103,7 @@ Run a locally installed JS module `foo`.
 == Good articles ==
 
 * https://github.com/markerikson/react-redux-links[tutorials and resources on React, Redux, ES6 and more]
-  (don't get overwhelmed, learn stuff step by step)
+  (don't get overwhelmed!)
 * https://www.robinwieruch.de/redux-mobx-confusion/[dissolving the confusion around Redux and MobX]
 * https://goshakkk.name/redux-antipattern-mapstatetoprops/[writing meaningful `mapStateToProps`]
 * https://decembersoft.com/posts/a-simple-naming-convention-for-action-creators-in-redux-js/[convention

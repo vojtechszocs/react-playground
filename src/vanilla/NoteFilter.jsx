@@ -13,7 +13,9 @@ const NoteFilter = ({ value, onChange, onReset }) => (
            value={value}
            onChange={event => { onChange(event.target.value)}} />
 
-    <button onClick={onReset}>Reset</button>
+    <button onClick={onReset} disabled={!value}>
+      Reset
+    </button>
 
   </div>
 )

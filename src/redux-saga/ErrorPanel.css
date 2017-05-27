@@ -1,0 +1,12 @@
+.root {
+  display: inline-block;
+  float: right;
+  border: 2px dashed grey;
+  padding: 1em;
+  margin-bottom: 1em;
+  margin-right: 1em;
+}
+
+.button {
+  margin-left: 0.5em;
+}

@@ -31,7 +31,8 @@ const devServerPort = 9000
 // application entry points, relative to webpack context
 const appEntryPoints = {
   'vanilla-react': './vanilla-react.app.jsx',
-  'react-redux': './react-redux.app.jsx'
+  'react-redux': './react-redux.app.jsx',
+  'react-redux-saga': './react-redux-saga.app.jsx'
 }
 
 // HtmlPlugin instance creator for a specific entry point
@@ -169,6 +170,10 @@ const config = module.exports = {
     htmlPluginInstance({
       entryChunk: 'react-redux',
       title: 'React App with Redux'
+    }),
+    htmlPluginInstance({
+      entryChunk: 'react-redux-saga',
+      title: 'React App with Redux and Saga'
     }),
 
     // copy static files into build output directory
