@@ -2,6 +2,10 @@
   padding: 1em;
 }
 
+.header {
+  margin-bottom: 1em;
+}
+
 .header:after {
   display: block;
   clear: both;
