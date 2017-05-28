@@ -1,7 +1,5 @@
-import dataTypes, { validate } from './data-types'
-
-const apiServerPort = 3000
-const apiBaseUrl = `http://localhost:${apiServerPort}`
+import { apiBaseUrl } from '../app-settings'
+import dataTypes, { validate } from '../data-types'
 
 const jsonHeaders = {
   'Accept': 'application/json',
@@ -16,28 +14,28 @@ const checkResponseStatus = (response) => {
   }
 }
 
-const callApi = ({ url, method, body }) => {
-  return fetch(url, {
-    method,
-    body,
-    headers: jsonHeaders
-  })
-    .then(checkResponseStatus)
-    .then(response => response.json())
-    .then(response => {
-      __DEV__ && console.log(`${method} ${url}`, response)
-      return response
-    })
+const logResponse = ({ url, method }) => (response) => {
+  if (__DEV__) {
+    console.log(`${method} ${url}`, response)
+  }
+  return response
 }
 
-const handleResult = (promise) => (
+const callApi = ({ url, method, body }) => {
+  return fetch(url, { method, body, headers: jsonHeaders })
+    .then(checkResponseStatus)
+    .then(response => response.json())
+    .then(logResponse({ url, method }))
+}
+
+const transformResult = (promise) => (
   promise.then(result => ({ result })).catch(error => ({ error }))
 )
 
 const remoteApi = {
 
   getNotes () {
-    return handleResult(
+    return transformResult(
       callApi({
         url: `${apiBaseUrl}/notes`,
         method: 'GET'
@@ -46,7 +44,7 @@ const remoteApi = {
   },
 
   addNote (note) {
-    return handleResult(
+    return transformResult(
       validate(dataTypes.Note, note)
         .then(() => callApi({
           url: `${apiBaseUrl}/notes`,
@@ -57,7 +55,7 @@ const remoteApi = {
   },
 
   removeNote (id) {
-    return handleResult(
+    return transformResult(
       validate(dataTypes.ID, id)
         .then(() => callApi({
           url: `${apiBaseUrl}/notes/${id}`,
@@ -67,7 +65,7 @@ const remoteApi = {
   },
 
   updateNote (note) {
-    return handleResult(
+    return transformResult(
       validate(dataTypes.Note, note)
         .then(() => callApi({
           url: `${apiBaseUrl}/notes/${note.id}`,

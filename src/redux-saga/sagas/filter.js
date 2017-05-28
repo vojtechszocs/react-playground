@@ -1,11 +1,12 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
 
-import localApi, { KEY_FILTER } from '../local-api'
+import localApi, { KEY_FILTER } from '../api/local'
 
 import { TYPE_INIT_FILTER, TYPE_PERSIST_AND_SET_FILTER, setFilter } from '../actions/filter'
 
 function* initFilterSaga () {
   const filter = yield call(localApi.getFromLocalStorage, KEY_FILTER)
+
   if (filter) {
     yield put(setFilter(filter))
   }
@@ -13,6 +14,7 @@ function* initFilterSaga () {
 
 function* persistAndSetFilterSaga (action) {
   const { filter } = action.payload
+
   yield call(localApi.setIntoLocalStorage, KEY_FILTER, filter)
   yield put(setFilter(filter))
 }
