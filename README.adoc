@@ -51,10 +51,9 @@ recent Windows platforms, https://www.xfive.co/blog/stop-supporting-ie10-ie9-ie8
 With https://webpack.js.org/configuration/dev-server/[dev-server], all project assets are
 processed in-memory (no `dist` directory).
 
-dev-server watches the filesystem and recompiles project assets on change, e.g. JS chunks
-whose content is impacted by the source change. Once recompiled, application's HTML page is
-automatically reloaded (this is done by injecting a script that opens a WebSocket connection
-to the server).
+dev-server watches the filesystem and recompiles project assets on change, regenerating JS
+chunks as needed. Once recompiled, application's HTML page is automatically reloaded (this
+is done by injecting a script that opens WebSocket connection to the server).
 
 == Basic commands ==
 
@@ -71,7 +70,6 @@ script. No code linting or unit tests, just the build itself.
 === `yarn run start:dev` ===
 
 Starts webpack dev-server, watching the filesystem and recompiling project assets on change.
-Serves both project assets and API requests (proxied to JSON API server).
 
 === `yarn run start:api` ===
 

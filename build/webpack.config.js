@@ -25,7 +25,6 @@ const isDev = env === 'development'
 const useSourceMap = true
 
 const packageInfo = require(`${baseDir}/package.json`)
-const apiServerPort = 3000
 const devServerPort = 9000
 
 // application entry points, relative to webpack context
@@ -194,20 +193,11 @@ const config = module.exports = {
 // development build configuration
 if (isDev) {
   config.devServer = {
-
     publicPath: config.output.publicPath,
     contentBase: staticDir,
     port: devServerPort,
     compress: true,
-    overlay: true,
-    // proxy URLs to API server through webpack dev-server
-    proxy: {
-      '/api': {
-        target: `http://localhost:${apiServerPort}`,
-        pathRewrite: { '^/api': '' }
-      }
-    }
-
+    overlay: true
   }
 }
 

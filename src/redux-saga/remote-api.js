@@ -1,6 +1,7 @@
 import dataTypes, { validate } from './data-types'
 
-const apiBaseUrl = '/api'
+const apiServerPort = 3000
+const apiBaseUrl = `http://localhost:${apiServerPort}`
 
 const jsonHeaders = {
   'Accept': 'application/json',
