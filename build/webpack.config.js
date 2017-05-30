@@ -192,6 +192,15 @@ const config = module.exports = {
 
 // development build configuration
 if (isDev) {
+  config.plugins.push(
+
+    // don't watch files controlled by JSON API server
+    new webpack.WatchIgnorePlugin([
+      `${baseDir}/tools/test-data.json`
+    ])
+
+  )
+
   config.devServer = {
     publicPath: config.output.publicPath,
     contentBase: staticDir,
