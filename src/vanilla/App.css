@@ -6,7 +6,7 @@
   margin-bottom: 1em;
 }
 
-.header:after {
+.header::after {
   display: block;
   clear: both;
   content: '';

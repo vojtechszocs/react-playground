@@ -7,8 +7,8 @@ export const filterNotes = (notes, filter) => {
     const text = note.text
     const tags = note.tags || []
 
-    return text.toLowerCase().includes(filter.toLowerCase())
-      || tags.some(tag => tag.toLowerCase().includes(filter.toLowerCase()))
+    return text.toLowerCase().includes(filter.toLowerCase()) ||
+      tags.some(tag => tag.toLowerCase().includes(filter.toLowerCase()))
   })
 }
 

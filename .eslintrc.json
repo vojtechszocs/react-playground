@@ -11,5 +11,10 @@
   },
   "globals": {
     "__DEV__": false
+  },
+  "rules": {
+    "generator-star-spacing": ["error", "after"],
+    "padded-blocks": ["error", { "switches": "always" }],
+    "yield-star-spacing": ["error", "after"]
   }
 }

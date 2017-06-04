@@ -2,7 +2,7 @@
   border: 2px solid grey;
   padding: 1em;
   margin-bottom: 1em;
-  background: #eeffee;
+  background: #efe;
 }
 
 .root:last-child {
@@ -17,7 +17,7 @@
   line-height: 2em;
 }
 
-.textWithButtons:after {
+.textWithButtons::after {
   display: block;
   clear: both;
   content: '';
