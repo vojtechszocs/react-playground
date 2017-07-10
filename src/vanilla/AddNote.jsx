@@ -32,12 +32,12 @@ const AddNote = ({ onAdd }) => {
       <form onSubmit={onFormSubmit}>
 
         <input type='text' className={style.input}
-               placeholder='Enter some text here'
-               ref={input => { textInput = input }} />
+          placeholder='Enter some text here'
+          ref={input => { textInput = input }} />
 
         <input type='text' className={style.input}
-               placeholder='Tags, separated by commas (optional)'
-               ref={input => { tagInput = input }} />
+          placeholder='Tags, separated by commas (optional)'
+          ref={input => { tagInput = input }} />
 
         <button type='submit'>Add Note</button>
 

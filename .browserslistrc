@@ -1,0 +1,5 @@
+# https://github.com/ai/browserslist
+
+last 2 versions
+not IE < 11
+Firefox ESR

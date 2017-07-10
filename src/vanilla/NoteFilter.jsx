@@ -9,9 +9,9 @@ const NoteFilter = ({ value, onChange, onReset }) => (
     <span>Find notes:</span>
 
     <input type='text' className={style.input}
-           placeholder='Filter by text or tags'
-           value={value}
-           onChange={event => { onChange(event.target.value)}} />
+      placeholder='Filter by text or tags'
+      value={value}
+      onChange={event => { onChange(event.target.value) }} />
 
     <button onClick={onReset} disabled={!value}>
       Reset

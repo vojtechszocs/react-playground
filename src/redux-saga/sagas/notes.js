@@ -12,7 +12,7 @@ import {
   TYPE_TOGGLING_NOTE, togglingNoteSucceeded, togglingNoteFailed
 } from '../actions/notes'
 
-function handleError (apiError, apiResultValidator = () => undefined) {
+const handleError = (apiError, apiResultValidator = () => undefined) => {
   if (apiError) {
     console.error('API call failed', apiError)
     return apiError

@@ -20,14 +20,14 @@ const ErrorPanel = ({ errors, onClear }) => {
       <span>Errors:</span>
 
       <button className={style.button}
-              onClick={onShow}
-              disabled={noErrors}>
+        onClick={onShow}
+        disabled={noErrors}>
         Show ({errorCount})
       </button>
 
       <button className={style.button}
-              onClick={onClear}
-              disabled={noErrors}>
+        onClick={onClear}
+        disabled={noErrors}>
         Clear
       </button>
 

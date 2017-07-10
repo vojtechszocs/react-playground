@@ -8,9 +8,9 @@ const NoteList = ({ notes, onDoneToggle, onRemove, onTagClick }) => (
 
     {notes.map(note => (
       <Note key={note.id} {...note}
-            onDoneToggleClick={() => onDoneToggle(note.id)}
-            onRemoveClick={() => onRemove(note.id)}
-            onTagClick={onTagClick} />
+        onDoneToggleClick={() => onDoneToggle(note.id)}
+        onRemoveClick={() => onRemove(note.id)}
+        onTagClick={onTagClick} />
     ))}
 
   </div>

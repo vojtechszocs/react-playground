@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import autoBind from 'react-autobind'
 
 import style from './App.css'
@@ -74,15 +73,15 @@ class App extends React.Component {
           <AddNote onAdd={this.addNote} />
 
           <NoteFilter value={this.state.filter}
-                      onChange={this.setFilter}
-                      onReset={this.resetFilter} />
+            onChange={this.setFilter}
+            onReset={this.resetFilter} />
 
         </div>
 
         <NoteList notes={filterNotes(this.state.notes, this.state.filter)}
-                  onDoneToggle={this.toggleNoteDone}
-                  onRemove={this.removeNote}
-                  onTagClick={this.setFilter} />
+          onDoneToggle={this.toggleNoteDone}
+          onRemove={this.removeNote}
+          onTagClick={this.setFilter} />
 
         {__DEV__ && console.log('<App> component state', this.state)}
 

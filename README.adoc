@@ -1,4 +1,3 @@
-:toc: macro
 :node-version: 6
 :dev-server-port: 9000
 
@@ -11,32 +10,60 @@ ____
 
 *WORK IN PROGRESS*
 
-toc::[]
-
-== Common technology stack ==
+== Technologies
 
 * https://webpack.js.org/[webpack] with http://babeljs.io/[Babel] using
   https://babeljs.io/docs/plugins/preset-es2015/[ES2015] preset
 * http://eslint.org/[ESLint] with https://standardjs.com/[JavaScript Standard Style] rules
 * https://stylelint.io/[stylelint] with
   https://github.com/stylelint/stylelint-config-standard[common CSS] rules
-* https://github.com/css-modules/css-modules[CSS modules] (_coming soon:_ http://postcss.org/[PostCSS])
+* https://github.com/mishoo/UglifyJS2[UglifyJS] and http://cssnano.co/[cssnano] for optimizing
+  production builds
+
+=== Browser support
+
+The https://github.com/vojtechszocs/react-playground/blob/master/.browserslistrc[Browserslist]
+file is used to define supported browsers.
 
 As for Internet Explorer(TM), we only care about the officially supported (latest) version for
 recent Windows platforms, https://www.xfive.co/blog/stop-supporting-ie10-ie9-ie8/[and so should you].
 
-== Prototypes ==
+=== Wait, where's the rest of CSS toolchain?
 
-* http://localhost:{dev-server-port}/vanilla-react.html[Vanilla React App]
-* http://localhost:{dev-server-port}/react-redux.html[React App with Redux] -- Vanilla plus
-  http://redux.js.org/[Redux] {amp} https://github.com/reactjs/react-redux[react-redux], featuring
-  https://github.com/reactjs/reselect[Reselect] for efficient client state selectors
-* http://localhost:{dev-server-port}/react-redux-saga.html[React App with Redux and Saga] -- Redux plus
-  https://redux-saga.js.org/[Redux-Saga], featuring https://github.com/gcanti/tcomb[tcomb] for API data
-  type validation
-* _coming soon:_ https://mobx.js.org/[MobX]
+Our webpack CSS loader configuration is minimal on purpose, using the standard `css-loader` with
+https://github.com/css-modules/css-modules[CSS Modules] enabled and custom http://cssnano.co/[cssnano]
+options for production builds.
 
-== Development environment ==
+For bigger projects, you can use the up-and-coming http://postcss.org/[PostCSS] with its ecosystem
+of https://www.postcss.parts/[plugins]. Or use tried-and-true tools like http://sass-lang.com/[Sass]
+or http://lesscss.org/[Less] that come packed with lots of features out of the box.
+
+== Prototypes
+
+Each prototype is a separate React-based web application built with webpack.
+
+=== http://localhost:{dev-server-port}/vanilla-react.html[Vanilla React App]
+
+* pure React application
+* state centralized in top-level `<App>` component
+
+=== http://localhost:{dev-server-port}/react-redux.html[React App with Redux]
+
+_Vanilla React App_ plus:
+
+* http://redux.js.org/[Redux] with https://github.com/reactjs/react-redux[react-redux] bindings
+  for predictable state management
+* https://github.com/reactjs/reselect[Reselect] for efficient computation of derived data
+
+=== http://localhost:{dev-server-port}/react-redux-saga.html[React App with Redux and Saga]
+
+_React App with Redux_ plus:
+
+* https://redux-saga.js.org/[Redux-Saga] for handling asynchronous operations (like HTTP requests)
+  and side effects (like browser `localStorage` access)
+* https://github.com/gcanti/tcomb[tcomb] for API data type validation
+
+== Development environment
 
 . install https://github.com/creationix/nvm[nvm] and run `nvm install v{node-version}.y.z`
   *or* install https://nodejs.org/[Node.js] v{node-version} (LTS) manually on your platform
@@ -46,59 +73,59 @@ recent Windows platforms, https://www.xfive.co/blog/stop-supporting-ie10-ie9-ie8
 . start webpack dev-server via `yarn run start:dev` and JSON API server via `yarn run start:api`
 . open the link:#prototypes[prototype page] in your web browser and start hacking!
 
-=== Using webpack dev-server ===
+=== webpack dev-server
 
 With https://webpack.js.org/configuration/dev-server/[dev-server], all project assets are
 processed in-memory (no `dist` directory).
 
 dev-server watches the filesystem and recompiles project assets on change, regenerating JS
 chunks as needed. Once recompiled, application's HTML page is automatically reloaded (this
-is done by injecting a script that opens WebSocket connection to the server).
+is done by injecting a script that opens WebSocket connection to dev-server).
 
-== Basic commands ==
+== Basic commands
 
-=== `yarn run build` ===
+=== `yarn run build`
 
 Build project for production. Outputs are placed in `dist` directory. Performs code linting
 and runs unit tests before doing the actual build.
 
-=== `yarn run build:dev` ===
+=== `yarn run build:dev`
 
 Build project for development (without optimizations). Same output location as with `build`
 script. No code linting or unit tests, just the build itself.
 
-=== `yarn run start:dev` ===
+=== `yarn run start:dev`
 
 Starts webpack dev-server, watching the filesystem and recompiling project assets on change.
 
-=== `yarn run start:api` ===
+=== `yarn run start:api`
 
 Starts JSON API server that imitates a real backend.
 
-=== `yarn run test` ===
+=== `yarn run test`
 
 TODO implement
 
-=== `yarn run test:watch` ===
+=== `yarn run test:watch`
 
 TODO implement
 
-== Other commands ==
+== Other commands
 
-=== `yarn outdated` ===
+=== `yarn outdated`
 
 Check for outdated dependencies.
 
-=== `yarn check` ===
+=== `yarn check`
 
 Validates dependency resolutions in `yarn.lock` based on project's dependencies declared in
 `package.json`.
 
-=== `yarn run foo` / `yarn run foo \-- args` ===
+=== `yarn run foo` / `yarn run foo \-- args`
 
 Run a locally installed JS module `foo`.
 
-== Good articles ==
+== Good articles
 
 * https://github.com/markerikson/react-redux-links[tutorials and resources on React, Redux, ES6 and more]
   (don't get overwhelmed!)
@@ -107,6 +134,6 @@ Run a locally installed JS module `foo`.
 * https://decembersoft.com/posts/a-simple-naming-convention-for-action-creators-in-redux-js/[convention
   to differentiate action creators from action types]
 
-== License ==
+== License
 
 https://github.com/vojtechszocs/react-playground/blob/master/LICENSE[MIT]

@@ -13,8 +13,12 @@
     "__DEV__": false
   },
   "rules": {
-    "generator-star-spacing": ["error", "after"],
     "padded-blocks": ["error", { "switches": "always" }],
-    "yield-star-spacing": ["error", "after"]
+    "object-curly-spacing": ["error", "always"],
+    "generator-star-spacing": ["error", "after"],
+    "yield-star-spacing": ["error", "after"],
+    "no-unused-vars": ["error", {
+      "varsIgnorePattern": "(React)"
+    }]
   }
 }

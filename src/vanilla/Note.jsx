@@ -4,10 +4,7 @@ import classNames from 'classnames'
 
 import style from './Note.css'
 
-const Note = ({
-    text, tags = [], done = false,
-    onDoneToggleClick, onRemoveClick, onTagClick
-  }) => (
+const Note = ({ text, tags = [], done = false, onDoneToggleClick, onRemoveClick, onTagClick }) => (
 
   <div className={classNames(style.root, {
     [style.rootDone]: done

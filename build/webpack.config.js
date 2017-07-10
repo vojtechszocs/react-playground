@@ -4,58 +4,57 @@
 
 const path = require('path')
 const webpack = require('webpack')
+const webpackMerge = require('webpack-merge')
 
-const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin')
 const CleanPlugin = require('clean-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const HtmlPlugin = require('html-webpack-plugin')
+
+const loaders = require('./webpack.config.loaders')
+const plugins = require('./webpack.config.plugins')
+const utils = require('./webpack.config.utils')
 
 const baseDir = path.normalize(path.resolve(__dirname, '..'))
 const srcDir = `${baseDir}/src`
 const buildDir = `${baseDir}/build`
 const staticDir = `${baseDir}/static`
+const toolsDir = `${baseDir}/tools`
 const distDir = `${baseDir}/dist`
 
 const env = process.env.NODE_ENV || 'development'
-const isProd = env === 'production'
 const isDev = env === 'development'
 
-// use source maps for all builds
-const useSourceMap = true
-
 const packageInfo = require(`${baseDir}/package.json`)
+const useSourceMap = true // use source maps for all builds
 const devServerPort = 9000
 
-// application entry points, relative to webpack context
-const appEntryPoints = {
-  'vanilla-react': './vanilla-react.app.jsx',
-  'react-redux': './react-redux.app.jsx',
-  'react-redux-saga': './react-redux-saga.app.jsx'
+// definition of entry points, one per each application
+const entryPoints = {
+  'vanilla-react': {
+    entry: './vanilla-react.app.jsx',
+    title: 'Vanilla React App'
+  },
+  'react-redux': {
+    entry: './react-redux.app.jsx',
+    title: 'React App with Redux'
+  },
+  'react-redux-saga': {
+    entry: './react-redux-saga.app.jsx',
+    title: 'React App with Redux and Saga'
+  }
 }
 
-// HtmlPlugin instance creator for a specific entry point
-function htmlPluginInstance ({ entryChunk, title }) {
-  return new HtmlPlugin({
-    chunks: ['vendor', 'common', entryChunk],
-    title,
-    filename: `${entryChunk}.html`,
-    template: `${buildDir}/app-index.html.ejs`,
-    inject: true,
-    hash: true
-  })
-}
+// basic build configuration
+const baseConfig = {
 
-// common configuration applicable to all environments
-const config = module.exports = {
-
-  // base directory for resolving paths in entry points
+  // base directory for resolving entry point paths
   context: srcDir,
 
   // entry points, each one represented by a separate bundle
-  entry: Object.assign({
-    'vendor': ['babel-polyfill', 'whatwg-fetch']
-  }, appEntryPoints),
+  entry: utils.webpackEntry({
+    entryPoints,
+    // put all mandatory vendor modules here
+    vendorModules: ['babel-polyfill']
+  }),
 
   // compilation output settings
   output: {
@@ -66,61 +65,33 @@ const config = module.exports = {
     pathinfo: isDev
   },
 
-  // configure output for use with developer tooling, always prefer
-  // the `source-map` option for production builds
+  // configure output for use with developer tooling
+  // note: always prefer `source-map` option for production builds
   devtool: isDev ? 'cheap-source-map' : 'source-map',
 
-  // customize how webpack resolves modules to be part of the bundle
+  // customize how webpack resolves modules
   resolve: {
     extensions: ['.js', '.jsx', '.json', '*']
   },
 
-  // settings applied to normal webpack modules
+  // configure how webpack treats different kinds of modules
   module: {
 
     rules: [
       {
         test: /\.jsx?$/,
         include: srcDir,
-        loader: 'babel-loader',
-        options: {
-          presets: ['es2015', 'react'],
-          plugins: ['transform-object-rest-spread']
-        }
-      },
-      {
-        test: /\.json$/,
-        include: srcDir,
-        loader: 'json-loader'
+        use: loaders.jsLoaders()
       },
       {
         test: /\.css$/,
-        use: isDev ? [
-          {
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: useSourceMap,
-              // https://github.com/css-modules/css-modules
-              modules: true,
-              localIdentName: isDev ? '[name]_[local]_[hash:base64]' : '[hash:base64]',
-              minimize: isProd
-            }
-          }
-        ] : ExtractTextPlugin.extract({
-          use: 'css-loader',
-          fallback: 'style-loader'
-        })
+        use: isDev
+          ? loaders.cssLoadersForDevelopment({ useSourceMap })
+          : loaders.cssLoadersForProduction({ useSourceMap })
       },
       {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-        loader: 'url-loader',
-        options: {
-          // return data URL if the file is smaller than given limit
-          limit: 10000 // 10 kB
-        }
+        use: loaders.imageAndFontLoaders()
       }
     ]
 
@@ -129,31 +100,8 @@ const config = module.exports = {
   // webpack plugins to enhance the compilation
   plugins: [
 
-    // global constants, replace each occurrence with expression
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(env),
-      '__DEV__': JSON.stringify(isDev)
-    }),
-
-    // common chunk, containing code shared between entry points
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'common',
-      chunks: Object.keys(appEntryPoints)
-    }),
-
-    // explicit vendor chunk, excluding application-specific code
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: Infinity
-    }),
-
-    // export JSON file that maps chunk IDs to resulting asset files,
-    // allows long-term caching by ensuring the vendor chunk doesn't
-    // change when the application code itself (=> `hash`) changes
-    new ChunkManifestPlugin({
-      filename: 'manifest.json',
-      manifestVariable: 'webpackManifest'
-    }),
+    // apply common plugins, defining common and vendor chunks
+    ...plugins.commonPlugins({ isDev, entryPoints }),
 
     // clean build output directory
     new CleanPlugin([distDir], {
@@ -161,84 +109,61 @@ const config = module.exports = {
       verbose: isDev
     }),
 
-    // generate an HTML page for each entry point
-    htmlPluginInstance({
-      entryChunk: 'vanilla-react',
-      title: 'Vanilla React App'
-    }),
-    htmlPluginInstance({
-      entryChunk: 'react-redux',
-      title: 'React App with Redux'
-    }),
-    htmlPluginInstance({
-      entryChunk: 'react-redux-saga',
-      title: 'React App with Redux and Saga'
-    }),
-
     // copy static files into build output directory
     new CopyPlugin([
       { from: staticDir }
     ]),
 
-    // options shared by all webpack loaders
-    new webpack.LoaderOptionsPlugin({
-      debug: isDev,
-      minimize: isProd
+    // generate HTML page for each entry point
+    ...plugins.htmlPlugins({
+      entryPoints,
+      template: `${buildDir}/app-index.html.ejs`
     })
 
   ]
 
 }
 
-// development build configuration
-if (isDev) {
-  config.plugins.push(
+// adapts to development build configuration
+const devConfig = webpackMerge(baseConfig, {
 
-    // don't watch files controlled by JSON API server
+  // additional plugins used for development
+  plugins: [
+
+    // prevent webpack from watching specific files
     new webpack.WatchIgnorePlugin([
-      `${baseDir}/tools/test-data.json`
+      `${toolsDir}/test-data.json`
     ])
 
-  )
+  ],
 
-  config.devServer = {
-    publicPath: config.output.publicPath,
+  // configure webpack dev-server
+  devServer: {
+    publicPath: baseConfig.output.publicPath,
     contentBase: staticDir,
     port: devServerPort,
     compress: true,
     overlay: true
   }
-}
 
-// production build configuration
-if (isProd) {
-  config.plugins.push(
+})
 
-    // run UglifyJS to minimize application's assets
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: useSourceMap,
-      compress: {
-        warnings: isDev
-      }
-    }),
+// adapts to production build configuration
+const prodConfig = webpackMerge(baseConfig, {
 
-    // try to keep generated chunk size above the given limit
-    // by merging several smaller chunks together
-    new webpack.optimize.MinChunkSizePlugin({
-      minChunkSize: 512000 // 512 kB
-    }),
+  // additional plugins used for production
+  plugins: [
 
-    // extract all CSS from the bundle into a separate file
-    // that will be loaded in parallel to the application code
-    new ExtractTextPlugin({
-      filename: '[name].[contenthash].css',
-      allChunks: true
-    }),
+    // apply the usual production build plugins
+    ...plugins.productionBuildPlugins({ useSourceMap }),
 
     // emit banner comment at the top of each generated chunk
     new webpack.BannerPlugin({
       banner: `${packageInfo.name} v${packageInfo.version}`
     })
 
-  )
-}
+  ]
+
+})
+
+module.exports = isDev ? devConfig : prodConfig
