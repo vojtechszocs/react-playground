@@ -13,5 +13,5 @@ export const filterNotes = (notes, filter) => {
 }
 
 export const nextNoteId = (notes) => {
-  return notes.reduce((acc, note) => Math.max(acc, note.id), 0) + 1
+  return notes.reduce((acc, note) => Math.max(acc, note.id || 0), 0) + 1
 }

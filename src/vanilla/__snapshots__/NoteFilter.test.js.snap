@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoteFilter renders correctly 1`] = `
+<div
+  className="root"
+>
+  <span>
+    Find notes:
+  </span>
+  <input
+    className="input"
+    onChange={[Function]}
+    placeholder="Filter by text or tags"
+    type="text"
+    value="test"
+  />
+  <button
+    disabled={false}
+    onClick={[Function]}
+  >
+    Reset
+  </button>
+</div>
+`;
+
+exports[`NoteFilter renders correctly 2`] = `
+<div
+  className="root"
+>
+  <span>
+    Find notes:
+  </span>
+  <input
+    className="input"
+    onChange={[Function]}
+    placeholder="Filter by text or tags"
+    type="text"
+    value=""
+  />
+  <button
+    disabled={true}
+    onClick={[Function]}
+  >
+    Reset
+  </button>
+</div>
+`;

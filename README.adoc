@@ -19,6 +19,8 @@ ____
   https://github.com/stylelint/stylelint-config-standard[common CSS] rules
 * https://github.com/mishoo/UglifyJS2[UglifyJS] and http://cssnano.co/[cssnano] for optimizing
   production builds
+* https://facebook.github.io/jest/[Jest] with http://airbnb.io/enzyme/[Enzyme] for testing
+  JS code and React components
 
 === Browser support
 
@@ -35,7 +37,7 @@ https://github.com/css-modules/css-modules[CSS Modules] enabled and custom http:
 options for production builds.
 
 For bigger projects, you can use the up-and-coming http://postcss.org/[PostCSS] with its ecosystem
-of https://www.postcss.parts/[plugins]. Or use tried-and-true tools like http://sass-lang.com/[Sass]
+of https://www.postcss.parts/[plugins] or use more traditional tools like http://sass-lang.com/[Sass]
 or http://lesscss.org/[Less] that come packed with lots of features out of the box.
 
 == Prototypes
@@ -82,6 +84,18 @@ dev-server watches the filesystem and recompiles project assets on change, regen
 chunks as needed. Once recompiled, application's HTML page is automatically reloaded (this
 is done by injecting a script that opens WebSocket connection to dev-server).
 
+=== Testing
+
+There are several types of tests included in this project:
+
+* regular JS unit test:
+  https://github.com/vojtechszocs/react-playground/blob/master/src/vanilla/utils.test.js[utils.test.js]
+
+* React component test:
+  https://github.com/vojtechszocs/react-playground/blob/master/src/vanilla/NoteFilter.test.js[NoteFilter.test.js]
+
+_Coming up next:_ Redux reducer test, Saga test, async service test (like `remote.js`)
+
 == Basic commands
 
 === `yarn run build`
@@ -96,19 +110,25 @@ script. No code linting or unit tests, just the build itself.
 
 === `yarn run start:dev`
 
-Starts webpack dev-server, watching the filesystem and recompiling project assets on change.
+Start webpack dev-server, watching the filesystem and recompiling project assets on change.
 
 === `yarn run start:api`
 
-Starts JSON API server that imitates a real backend.
+Start JSON API server that imitates a real backend.
 
 === `yarn run test`
 
-TODO implement
+Run unit tests. Avoids side effects such as automatically creating snapshot files if missing.
+Suitable for execution in CI environment.
+
+=== `yarn run test:snap`
+
+Run unit tests and automatically create/update snapshot files if they are missing/conflicting.
+Use this *only* when snapshot files need to be created/updated.
 
 === `yarn run test:watch`
 
-TODO implement
+Run unit tests, then watch the filesystem and rerun tests related to changed files.
 
 == Other commands
 
@@ -118,12 +138,12 @@ Check for outdated dependencies.
 
 === `yarn check`
 
-Validates dependency resolutions in `yarn.lock` based on project's dependencies declared in
+Validate dependency resolutions in `yarn.lock` based on project's dependencies declared in
 `package.json`.
 
 === `yarn run foo` / `yarn run foo \-- args`
 
-Run a locally installed JS module `foo`.
+Run a locally installed JS module `foo` with optional `args`.
 
 == Good articles
 

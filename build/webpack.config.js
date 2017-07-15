@@ -9,6 +9,7 @@ const webpackMerge = require('webpack-merge')
 const CleanPlugin = require('clean-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
+const moduleTypes = require('./module-types')
 const loaders = require('./webpack.config.loaders')
 const plugins = require('./webpack.config.plugins')
 const utils = require('./webpack.config.utils')
@@ -71,6 +72,7 @@ const baseConfig = {
 
   // customize how webpack resolves modules
   resolve: {
+    modules: ['node_modules'],
     extensions: ['.js', '.jsx', '.json', '*']
   },
 
@@ -79,18 +81,18 @@ const baseConfig = {
 
     rules: [
       {
-        test: /\.jsx?$/,
+        test: moduleTypes.js,
         include: srcDir,
         use: loaders.jsLoaders()
       },
       {
-        test: /\.css$/,
+        test: moduleTypes.css,
         use: isDev
           ? loaders.cssLoadersForDevelopment({ useSourceMap })
           : loaders.cssLoadersForProduction({ useSourceMap })
       },
       {
-        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+        test: moduleTypes.imageAndFont,
         use: loaders.imageAndFontLoaders()
       }
     ]
